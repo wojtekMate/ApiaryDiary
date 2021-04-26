@@ -1,0 +1,18 @@
+version: '3.7'
+services: 
+    apiservice:
+        container_name: apiarydiary-api
+        build: 
+            context: ./src/ApiaryDiary.Api
+            dockerfile: dockerfile
+        ports: 
+          - "5000:5000"
+    uiservice:
+        container_name: apiarydiary-ui
+        build: 
+            context: ./UI/apiary-diary
+            dockerfile: dockerfile
+        ports: 
+          - "4200:80"
+        depends_on: 
+          - apiservice
