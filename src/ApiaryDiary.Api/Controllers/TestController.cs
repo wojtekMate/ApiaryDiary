@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -27,7 +28,7 @@ namespace ApiaryDiary.Api.Controllers
         public string Get()
         {
 
-            return "Hello from Wólczyńska street";
+            return "Welcome to Apiary Diary";
         }
     }
 }
