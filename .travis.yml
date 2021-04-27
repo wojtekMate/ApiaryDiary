@@ -2,17 +2,18 @@ language: csharp
 dist: trusty
 sudo: required
 mono: none
-dotnet: 5.0
+dotnet: 5.0.100
 branches:
   only:
     - master
 before_script:
   - chmod -R a+x scripts
 script:
-  - ./scripts/travis-build.sh
-  - ./scripts/test.sh
+  - dotnet restore
+  - dotnet build
 after_success:
-  - ./scripts/travis-success.sh
+  - echo Executing after success scripts on branch $TRAVIS_BRANCH
+  - echo The end !!!!
 notifications:
   email:
     on_success: never
