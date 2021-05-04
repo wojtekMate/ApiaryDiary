@@ -18,6 +18,7 @@ after_success:
   - echo Loging to server...
   - sshpass -p $ApiaryDiaryIPPassword ssh -o StrictHostKeyChecking=no root@$ApiaryDiaryIP
   - echo Logged to server
+  - apt-get install sshpass
   - sshpass -p $ApiaryDiaryIPPassword ssh root@ApiaryDiaryIP
   - cd /etc/nginx/sites-available
   - ls
