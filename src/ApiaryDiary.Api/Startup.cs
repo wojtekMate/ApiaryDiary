@@ -57,7 +57,7 @@ namespace ApiaryDiary.Api
                 endpoints.MapControllers();
             });
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection(); //
         }
     }
 }
