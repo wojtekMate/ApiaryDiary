@@ -18,8 +18,9 @@ after_success:
   - echo Loging to server...
   - sshpass -p $ApiaryDiaryIPPassword ssh -o StrictHostKeyChecking=no root@$ApiaryDiaryIP
   - echo Logged to server
+  - sshpass -p $ApiaryDiaryIPPassword ssh root@ApiaryDiaryIP
+  - cd /etc/nginx/sites-available
   - ls
-  -  nano docker-compose.yml
 notifications:
   email:
     on_success: never
