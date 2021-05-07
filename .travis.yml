@@ -19,7 +19,7 @@ after_success:
   - sshpass -p $ApiaryDiaryIPPassword ssh -o StrictHostKeyChecking=no root@$ApiaryDiaryIP
   - echo Logged to server
   - sudo apt-get install sshpass
-  - sshpass -p $ApiaryDiaryIPPassword ssh root@$ApiaryDiaryIP
+  - sshpass -p $ApiaryDiaryIPPassword ssh root@$ApiaryDiaryIP <<EOF ls EOF
   - cd /etc/nginx/sites-available
   - ls
 notifications:
