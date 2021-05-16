@@ -17,7 +17,10 @@ after_success:
   - echo Publishing application
   - echo Loging to server...
   - echo Logged to server
-  - spawn ssh root@$ApiaryDiaryIP expect "password" send $ApiaryDiaryIPPassword interact 
+  - apt-get install sshpass
+  - sshpass -p '$ApiaryDiaryIPPassword' ssh 'root@ApiaryDiaryIP'
+  - ls
+  - sshpass -p $ApiaryDiaryIPPassword ssh root@ApiaryDiaryIP
   - ls
   - cd /etc/nginx/sites-available
   - ls
