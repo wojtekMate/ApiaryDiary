@@ -7,3 +7,4 @@ echo root@"$Ip"
 sshpass -p "$pass"  ssh root@"$Ip" 'docker-compose up'
 echo wykonano
 echo $Ip
+echo end
