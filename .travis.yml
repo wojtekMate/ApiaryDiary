@@ -8,7 +8,12 @@ branches:
 before_script:
   - chmod -R a+x scripts
 script:
-  - dotnet --info
+  - cd src/ApiaryDiary.Api
+  - dotnet restore
+  - dotnet build
+  - cd ..
+  - cd ..
+  - ls
 after_success:
   - echo Executing after success scripts on branch $TRAVIS_BRANCH
   - sudo apt-get install sshpass
