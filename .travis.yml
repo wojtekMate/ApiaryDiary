@@ -17,6 +17,8 @@ after_success:
   - echo $ApiaryDiaryIPPassword
   - echo $pa
   - echo "$pa"
+  - echo "$IP"
+  - echo $IP
   - sshpass -p "$pa" ssh root@46.101.251.246 'docker-compose up' 
   - sshpass -p $pa ssh root@46.101.251.246 'docker-compose up' 
   - cd /etc/nginx/sites-available
