@@ -19,9 +19,15 @@ after_success:
   - echo "$pa"
   - echo "$IP"
   - echo $IP
+  - ls
+  - cd ..
+  - ls 
+  - cd ..
+  - ls
   - ./scripts/docker-publish.sh
   - sshpass -p "$pa" ssh root@46.101.251.246 'docker-compose up' 
   - sshpass -p $pa ssh root@46.101.251.246 'docker-compose up' 
+
   - cd /etc/nginx/sites-available
   - ls
 notifications:
