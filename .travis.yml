@@ -11,9 +11,23 @@ script:
   - cd src/ApiaryDiary.Api
   - dotnet restore
   - dotnet build
+  - cd ..
+  - cd ..
+  - ls
 after_success:
   - echo Executing after success scripts on branch $TRAVIS_BRANCH
-  - echo The end !!!!
+  - sudo apt-get install sshpass
+  - echo $ApiaryDiaryIPPassword
+  - echo $pa
+  - echo "$pa"
+  - echo "$IP"
+  - echo $IP
+  - ls
+  - ./scripts/docker-publish.sh
+  - sshpass -p "$pa" ssh root@46.101.251.246 'docker-compose up' 
+  - sshpass -p $pa ssh root@46.101.251.246 'docker-compose up' 
+ - cd ..
+  - ls
 notifications:
   email:
     on_success: never

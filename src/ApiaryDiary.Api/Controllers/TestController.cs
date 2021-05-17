@@ -29,7 +29,7 @@ namespace ApiaryDiary.Api.Controllers
         public string Get()
         {
             Thread.Sleep(2000);
-            return "Welcome to Apiary Diary";
+            return "Love you Gulia :* !!!!!";
         }
     }
 }
