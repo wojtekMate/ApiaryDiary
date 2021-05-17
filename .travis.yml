@@ -16,6 +16,7 @@ after_success:
   - sudo apt-get install sshpass
   - echo $ApiaryDiaryIPPassword
   - echo $pa
+  - echo "$pa"
   - sshpass -p "$pa" ssh root@46.101.251.246 'docker-compose up' 
   - sshpass -p $pa ssh root@46.101.251.246 'docker-compose up' 
   - cd /etc/nginx/sites-available
