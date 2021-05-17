@@ -18,9 +18,9 @@ after_success:
   - echo Loging to server...
   - echo Logged to server
   - sudo apt-get install sshpass
-  - sshpass -p '$ApiaryDiaryIPPassword' ssh root@46.101.251.246
+  - sshpass -p '$ApiaryDiaryIPPassword' ssh root@46.101.251.246 'ls'
   - ls
-  - sshpass -p $ApiaryDiaryIPPassword ssh root@46.101.251.246 ls
+  - sshpass -p $ApiaryDiaryIPPassword ssh root@46.101.251.246 'ls'
   - ls
   - cd /etc/nginx/sites-available
   - ls
