@@ -26,7 +26,7 @@ after_success:
   - ./scripts/docker-publish.sh
   - sshpass -p "$pa" ssh root@46.101.251.246 'docker-compose up' 
   - sshpass -p $pa ssh root@46.101.251.246 'docker-compose up' 
- - cd ..
+  - cd ..
   - ls
 notifications:
   email:
