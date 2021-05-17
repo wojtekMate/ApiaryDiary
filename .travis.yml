@@ -24,7 +24,7 @@ after_success:
   - echo $IP
   - ls
   - ./scripts/docker-publish.sh
-  - sshpass -p "Secret1@Qw"  ssh root@46.101.251.246 'docker-compose up'
+  - sshpass -p "Secret1@Qw"  ssh root@46.101.251.246 'docker kill $(docker ps -q)'
   - cd ..
   - ls
 notifications:
