@@ -5,6 +5,8 @@ dotnet: 5.0.202
 branches:
   only:
     - master
+before_install:
+  - sudo apt-get -q update
 addons:
   apt:
     packages:
