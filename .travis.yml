@@ -5,8 +5,13 @@ dotnet: 5.0.202
 branches:
   only:
     - master
+addons:
+  apt:
+    packages:
+    - sshpass
 before_script:
   - chmod -R a+x scripts
+
 script:
   - cd src/ApiaryDiary.Api
   - dotnet restore
@@ -16,7 +21,6 @@ script:
   - ls
 after_success:
   - echo Executing after success scripts on branch $TRAVIS_BRANCH
-  - sudo apt-get install sshpass
   - ./scripts/docker-publish.sh
   - sshpass -p $ApiaryDiaryIPPassword  ssh root@$ApiaryDiaryIPAddress 'docker-compose up'
 notifications:
