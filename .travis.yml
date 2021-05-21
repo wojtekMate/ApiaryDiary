@@ -23,6 +23,7 @@ after_success:
   - echo Executing after success scripts on branch $TRAVIS_BRANCH
   - ./scripts/docker-publish.sh
   - sshpass -p $ApiaryDiaryIPPassword  ssh root@$ApiaryDiaryIPAddress 'docker-compose up'
+  - ls
 notifications:
   email:
     on_success: never
