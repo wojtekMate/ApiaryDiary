@@ -15,17 +15,14 @@ before_script:
   - chmod -R a+x scripts
 
 script:
-  - cd src/ApiaryDiary.Api
-  - dotnet restore
-  - dotnet build
-  - cd ..
-  - cd ..
   - ls
+  - ./scripts/travis-build.sh
+  - ls
+  - ./scripts/travis-success.sh
 after_success:
-  - echo Executing after success scripts on branch $TRAVIS_BRANCH
-  - ./scripts/docker-publish.sh
-  - sshpass -p $haslo  ssh root@$IP 'docker-compose up'
-notifications:
+  - ls
+  - echo Deploy to server $IP on branch $TRAVIS_BRANCH
+  - ./scripts/travis-success.deploy.sh
   email:
     on_success: never
     on_failure: always
