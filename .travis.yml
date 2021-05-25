@@ -22,7 +22,7 @@ script:
 after_success:
   - ls
   - echo Deploy to server $IP on branch $TRAVIS_BRANCH
-  - ./scripts/travis-success.deploy.sh
+  - ./scripts/travis-deploy.sh
   email:
     on_success: never
     on_failure: always
