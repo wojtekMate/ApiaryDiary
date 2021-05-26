@@ -1,6 +1,3 @@
 #!/bin/bash
-echo Executing after success scripts on branch $TRAVIS_BRANCH
-echo Publishing application
-./scripts/publish.sh
-echo Building and pushing Docker images
-./scripts/docker-publish.sh
+echo Deploy application on branch $TRAVIS_BRANCH to server:
+sshpass -p $ApiaryDiaryIPPassword ssh -o 'StrictHostKeyChecking=no' root@$ApiaryDiaryIPAddress "docker-compose up -d"
