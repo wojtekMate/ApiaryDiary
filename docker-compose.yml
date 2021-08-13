@@ -1,12 +1,13 @@
 version: '3.7'
-services: 
+services:
     api:
-        image: buckfast/apiarydiary-api
-        ports: 
+        image: buckfast/apiarydiary-api:latest
+        ports:
           - "5000:5000"
     ui:
-        image: buckfast/apiarydiary-ui
-        ports: 
+        image: buckfast/apiarydiary-ui:latest
+        ports:
           - "4200:80"
-        depends_on: 
+        depends_on:
           - api
+

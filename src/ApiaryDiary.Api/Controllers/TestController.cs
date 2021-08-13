@@ -29,7 +29,7 @@ namespace ApiaryDiary.Api.Controllers
         public string Get()
         {
             Thread.Sleep(2000);
-            return "cześć zibi";
+            return "working...";
         }
     }
 }

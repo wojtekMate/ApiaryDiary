@@ -13,9 +13,7 @@ case "$TRAVIS_BRANCH" in
     ;;    
 esac
 
-ls
 docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 docker build -t apiarydiary-api:$DOCKER_TAG -f dockerfile .
 docker tag apiarydiary-api:$DOCKER_TAG $DOCKER_USERNAME/apiarydiary-api:$DOCKER_TAG
 docker push $DOCKER_USERNAME/apiarydiary-api:$DOCKER_TAG
-ls
