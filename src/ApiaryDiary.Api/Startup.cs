@@ -31,7 +31,6 @@ namespace ApiaryDiary.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ApiaryDiary.Api", Version = "v1" });
             });
-          
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,8 +55,6 @@ namespace ApiaryDiary.Api
             {
                 endpoints.MapControllers();
             });
-
-            app.UseHttpsRedirection(); 
         }
     }
 }

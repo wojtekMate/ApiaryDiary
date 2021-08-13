@@ -17,16 +17,12 @@ packages:
 before_script:
   - chmod -R a+x scripts
 script:
-  - ls
   - ./scripts/travis-build.sh
-  - ls
   - ./scripts/travis-success.sh
 
 after_success:
-  - ls
   - echo Deploy to server $IP on branch $TRAVIS_BRANCH
   - ./scripts/travis-deploy.sh
-  - ls
 
 notifications:
   email:
