@@ -28,6 +28,7 @@ namespace ApiaryDiary.Api.Controllers
         [HttpGet]
         public string Get()
         { 
-			return "working CI/CD...";        }
+			return "working CI/CD...";      
+        }
     }
 }
