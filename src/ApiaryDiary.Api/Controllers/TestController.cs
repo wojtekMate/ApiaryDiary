@@ -27,9 +27,7 @@ namespace ApiaryDiary.Api.Controllers
 
         [HttpGet]
         public string Get()
-        {
-            Thread.Sleep(2000);
-            return "working...";
-        }
+        { 
+			return "working CI/CD...";        }
     }
 }
