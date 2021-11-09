@@ -3,7 +3,7 @@ services:
   - docker
 sudo: required
 mono: none
-dotnet: 5.0.202
+dotnet: 6.0
 branches:
   only:
     - master
