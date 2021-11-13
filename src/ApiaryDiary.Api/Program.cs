@@ -15,8 +15,42 @@ namespace ApiaryDiary.Api
         {
             var builder = WebApplication.CreateBuilder(args);
             var services = builder.Services;
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:4200")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
+            });
+
             services.AddControllers();
+            services.AddAuthentication(opts =>
+            {
+                opts.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                opts.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opts.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(cfg =>
+                {
+                    cfg.RequireHttpsMetadata = false;
+                    cfg.SaveToken = true;
+                    cfg.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                                    // Konfiguracja standardowa
+                                    ValidIssuer = Configuration["Auth:Jwt:Issuer"],
+                        ValidAudience = Configuration["Auth:Jwt:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Auth:Jwt:Key"])),
+                        ClockSkew = TimeSpan.Zero,
+                                    // Prze³¹czniki zwi¹zane z bezpieczeñstwem
+                                    RequireExpirationTime = true,
+                        ValidateIssuer = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidateAudience = true
+                    };
+                });
             var app = builder.Build();
             if (!app.Environment.IsDevelopment())
             {
@@ -25,12 +59,7 @@ namespace ApiaryDiary.Api
                 app.UseHsts();
             }
             app.UseRouting();
-            app.UseCors(x => x
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .SetIsOriginAllowed(origin => true) // allow any origin
-                .AllowCredentials()); // allow credentials
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
