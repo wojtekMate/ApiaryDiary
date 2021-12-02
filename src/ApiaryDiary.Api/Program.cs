@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+using ApiaryDiary.Application;
+using ApiaryDiary.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Shared;
 
 namespace ApiaryDiary.Api
 {
@@ -17,8 +19,11 @@ namespace ApiaryDiary.Api
         {
             var builder = WebApplication.CreateBuilder(args);
             var services = builder.Services;
-            services.AddCors();
+
+            services.AddSharedInfrastructure();
             services.AddControllers();
+            services.AddInfrastructure();
+            services.AddApplication();
             var app = builder.Build();
             if (!app.Environment.IsDevelopment())
             {
@@ -27,12 +32,7 @@ namespace ApiaryDiary.Api
                 app.UseHsts();
             }
             app.UseRouting();
-            app.UseCors(x => x
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .SetIsOriginAllowed(origin => true) // allow any origin
-                .AllowCredentials()); // allow credentials
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
