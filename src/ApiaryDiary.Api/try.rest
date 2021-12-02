@@ -1,18 +1,60 @@
+@url = http://localhost:5000
+//@usersApi = {{url}}/Users
+@usersApi = {{url}}/Users
 ###
 GET http://localhost:5000/test 
 
 ###
+###
+GET http://localhost:5000/Users/Account/location
+###
+@email = rej@gmail.com
+@password = password
+@role = admin
+@accessToken = secret
 
-POST https://example.com/comments HTTP/1.1
-content-type: application/json
+### Sign-up as the administrator
+POST {{url}}/Users/Account/sign-up
+Content-Type: application/json
 
 {
-    "name": "sample",
-    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+  "email": "{{email}}",
+  "password": "{{password}}",
+  "role": "{{role}}",
+  "claims": {
+    "permissions": ["all"]
+  }
 }
 
- ### Add a parcel and grab its id
-# @name add_parcel
+### Login as the administrator
+# @name sign_in_admin
+POST {{usersApi}}/Account/sign-in
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "password": "{{password}}"
+}
+
+###
+@accessTokenAdmin = {{sign_in_admin.response.body.$.accessToken}}
+
+###
+GET {{url}}/account
+Authorization: Bearer {{accessToken}}
+
+
+
+
+
+
+
+
+
+
+
+
+### Travis debbuging
 POST https://api.travis-ci.com/job/<JOB_ID>/debug
 Authorization: token {{accessToken}}
 Content-Type: application/json

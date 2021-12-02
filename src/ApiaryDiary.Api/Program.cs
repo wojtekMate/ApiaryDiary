@@ -2,10 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ApiaryDiary.Application;
+using ApiaryDiary.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Shared;
 
 namespace ApiaryDiary.Api
 {
@@ -15,42 +18,11 @@ namespace ApiaryDiary.Api
         {
             var builder = WebApplication.CreateBuilder(args);
             var services = builder.Services;
-            services.AddCors(options =>
-            {
-                options.AddPolicy(name: MyAllowSpecificOrigins,
-                    builder =>
-                    {
-                        builder.WithOrigins("http://localhost:4200")
-                            .AllowAnyHeader()
-                            .AllowAnyMethod();
-                    });
-            });
 
+            services.AddSharedInfrastructure();
             services.AddControllers();
-            services.AddAuthentication(opts =>
-            {
-                opts.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                opts.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                opts.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-                .AddJwtBearer(cfg =>
-                {
-                    cfg.RequireHttpsMetadata = false;
-                    cfg.SaveToken = true;
-                    cfg.TokenValidationParameters = new TokenValidationParameters()
-                    {
-                                    // Konfiguracja standardowa
-                                    ValidIssuer = Configuration["Auth:Jwt:Issuer"],
-                        ValidAudience = Configuration["Auth:Jwt:Audience"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Auth:Jwt:Key"])),
-                        ClockSkew = TimeSpan.Zero,
-                                    // Prze³¹czniki zwi¹zane z bezpieczeñstwem
-                                    RequireExpirationTime = true,
-                        ValidateIssuer = true,
-                        ValidateIssuerSigningKey = true,
-                        ValidateAudience = true
-                    };
-                });
+            services.AddInfrastructure();
+            services.AddApplication();
             var app = builder.Build();
             if (!app.Environment.IsDevelopment())
             {
