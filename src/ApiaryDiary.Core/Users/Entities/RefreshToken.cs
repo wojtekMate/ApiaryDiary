@@ -15,7 +15,7 @@ namespace ApiaryDiary.Core.Users.Entities
         public DateTime? RevokedAt { get; private set; }
         public DateTime Expires { get; set; }
         public bool IsExpired => DateTime.UtcNow >= Expires;
-        public bool Revoked => !RevokedAt.HasValue && !IsExpired;
+        public bool Revoked => RevokedAt.HasValue || IsExpired;
 
         protected RefreshToken()
         {

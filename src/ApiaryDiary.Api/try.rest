@@ -8,13 +8,13 @@ GET http://localhost:5000/test
 ###
 GET http://localhost:5000/Users/Account/location
 ###
-@email = rej@gmail.com
+@email = admin@apiary.com
 @password = password
 @role = admin
 @accessToken = secret
 
 ### Sign-up as the administrator
-POST {{url}}/Users/Account/sign-up
+POST {{usersApi}}/Account/sign-up
 Content-Type: application/json
 
 {
@@ -37,21 +37,23 @@ Content-Type: application/json
 }
 
 ###
-@accessTokenAdmin = {{sign_in_admin.response.body.$.accessToken}}
+@accessToken= {{sign_in_admin.response.body.$.accessToken}}
+@refreshToken = {{sign_in_admin.response.body.$.refreshToken}}
 
+###
+# @name refresh_tokens
+POST {{usersApi}}/Account/refresh-tokens
+Content-Type: application/json
+
+{
+  "refreshToken": "{{refreshToken}}"
+}
+
+###
+@accessToken= {{refresh_tokens.response.body.$.accessToken}}
 ###
 GET {{url}}/account
 Authorization: Bearer {{accessToken}}
-
-
-
-
-
-
-
-
-
-
 
 
 ### Travis debbuging
@@ -63,3 +65,4 @@ Accept: application/json
 {
   "quiet": true
 }
+
