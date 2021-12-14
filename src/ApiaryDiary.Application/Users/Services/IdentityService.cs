@@ -92,5 +92,10 @@ namespace ApiaryDiary.Application.Users.Services
             };
             await _userRepository.AddAsync(user);
         }
+
+        public async Task ResetPasswprd(SignUpDto dto)
+        {
+            await Task.CompletedTask;
+        }
     }
 }

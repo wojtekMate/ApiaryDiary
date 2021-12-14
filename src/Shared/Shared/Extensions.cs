@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Shared.Auth;
@@ -22,9 +23,15 @@ namespace Shared
                 options.AddPolicy(name: CorsPolicy,
                     builder =>
                     {
-                        builder.WithOrigins("http://localhost:4200")
-                            .AllowAnyHeader()
-                            .AllowAnyMethod();
+                        builder.WithOrigins("*")
+                        .WithMethods("POST", "PUT", "DELETE")
+                        .WithHeaders("Content-Type", "Authorization");
+                            //                    .WithOrigins("*")
+                            //.AllowAnyHeader()
+                            //.AllowAnyMethod();
+                        //.WithOrigins("http://localhost:4200")
+                        //    .AllowAnyHeader()
+                        //    .AllowAnyMethod();
                     });
             });
             services.AddSingleton<IContextFactory, ContextFactory>();
@@ -47,5 +54,17 @@ namespace Shared
             configuration.GetSection(sectionName).Bind(options);
             return options;
         }
+
+        public static IApplicationBuilder UseSharedInfrastructure(this IApplicationBuilder app)
+        {
+            app.UseCors(CorsPolicy);
+
+            app.UseAuthentication();
+            app.UseRouting();
+            app.UseAuthorization();
+
+            return app;
+        }
+
     }
 }

@@ -37,10 +37,10 @@ namespace ApiaryDiary.Application.Users.Services
             var now = _clock.CurrentDate();
             var expires = now.Add(_options.ExpiryRefreshToken);
             var refreshToken = new RefreshToken(Guid.NewGuid(), userId, token, DateTime.UtcNow, expires);
+            await _refreshTokenRepository.DeleteAsync(userId);
             await _refreshTokenRepository.AddAsync(refreshToken);
-
             return token;
-        }
+        } 
 
         public async Task RevokeAsync(string refreshToken)
         {
@@ -73,8 +73,9 @@ namespace ApiaryDiary.Application.Users.Services
                 throw new Exception();
             }
 
+            var newRefreshToken = await CreateAsync(user.Id);
             var auth = _authManager.CreateToken(token.UserId.ToString(), user.Role, claims: user.Claims);
-            auth.RefreshToken = refreshToken;
+            auth.RefreshToken = newRefreshToken;
 
             return auth;
         }

@@ -12,16 +12,19 @@ namespace ApiaryDiary.Api.Controllers.Users
     public class AccountController : BaseController
     {
         private readonly IIdentityService _identityService;
+        private readonly IRefreshTokenService _refreshTokenService;
         private readonly IContext _context;
 
-        public AccountController(IIdentityService identityService, IContext context)
+        public AccountController(IIdentityService identityService, IContext context, IRefreshTokenService refreshTokenService)
         {
             _identityService = identityService;
             _context = context;
+            _refreshTokenService = refreshTokenService;
         }
         [HttpGet("Location")]
         public ActionResult<string> Get()
             => OkOrNotFound("UsersController");
+
 
         [HttpGet]
         [Authorize]
@@ -39,5 +42,11 @@ namespace ApiaryDiary.Api.Controllers.Users
         [HttpPost("sign-in")]
         public async Task<ActionResult<JsonWebToken>> SignInAsync(SignInDto dto)
             => Ok(await _identityService.SignInAsync(dto));
+
+
+        [HttpPost("refresh-tokens")]
+        public async Task<ActionResult<JsonWebToken>> UseRefreshToken(RefreshTokenDto dto)
+            => Ok(await _refreshTokenService.UseAsync(dto.RefreshToken));
+
     }
 }

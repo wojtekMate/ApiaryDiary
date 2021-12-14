@@ -12,5 +12,7 @@ namespace ApiaryDiary.Application.Users.Repositories
         Task<RefreshToken> GetAsync(string token);
         Task AddAsync(RefreshToken token);
         Task UpdateAsync(RefreshToken token);
+        Task DeleteAsync(RefreshToken token);
+        Task DeleteAsync(Guid userId);
     }
 }
