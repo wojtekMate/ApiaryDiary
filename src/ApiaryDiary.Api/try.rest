@@ -46,22 +46,23 @@ POST {{usersApi}}/Account/refresh-tokens
 Content-Type: application/json
 
 {
-  "refreshToken": "{{refreshToken}}"
+  "refreshToken": "mk4781wvslEKtkPmAZauB2cYGCeIZUBvmOc9Xt"
 }
 
 ###
 @accessToken= {{refresh_tokens.response.body.$.accessToken}}
 ###
-GET {{url}}/account
+GET {{usersApi}}/Account
 Authorization: Bearer {{accessToken}}
 
 
 ### Travis debbuging
-POST https://api.travis-ci.com/job/<JOB_ID>/debug
-Authorization: token {{accessToken}}
+POST https://api.travis-ci.com/job/552203332/debug
+Authorization: token usGgTfz9Incr6J32SIhCJw
 Content-Type: application/json
 Travis-API-Version: 3
 Accept: application/json
+
 {
   "quiet": true
 }
