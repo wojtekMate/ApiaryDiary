@@ -17,14 +17,16 @@ namespace ApiaryDiary.Application.Users.Services
         private readonly IClock _clock; 
         private readonly IUserRepository _userRepository;
         private readonly IRefreshTokenService _refreshTokenService;
+        private readonly IUserEmailService _emailService;
 
-        public IdentityService(IPasswordHasher<User> passwordHasher,IAuthManager authManager, IClock clock, IUserRepository userRepository, IRefreshTokenService refreshTokenService)
+        public IdentityService(IPasswordHasher<User> passwordHasher,IAuthManager authManager, IClock clock, IUserRepository userRepository, IRefreshTokenService refreshTokenService, IUserEmailService emailService)
         {
             _passwordHasher = passwordHasher;
             _authManager = authManager;
             _clock = clock;
             _userRepository = userRepository;
             _refreshTokenService = refreshTokenService;
+            _emailService = emailService;
         }
 
         public async Task<AccountDto> GetAsync(Guid id)
@@ -87,13 +89,27 @@ namespace ApiaryDiary.Application.Users.Services
                 Password = password,
                 Role = dto.Role?.ToLowerInvariant() ?? "user",
                 CreatedAt = _clock.CurrentDate(),
-                IsActive = true,
-                Claims = dto.Claims ?? new Dictionary<string, IEnumerable<string>>()
-            };
+                IsActive = false,
+                Claims = dto.Claims ?? new Dictionary<string, IEnumerable<string>>(),
+                UserActivationToken = Guid.NewGuid().ToString("N")
+        };
             await _userRepository.AddAsync(user);
+            await _emailService.SendActivationEmail(user);
         }
 
-        public async Task ResetPasswprd(SignUpDto dto)
+        public async Task ActivateUser(ActivateAccaountDto dto)
+        {
+            var user = await _userRepository.GetByGuidAsync(dto.Token);
+            if (user is null)
+            {
+                throw new Exception();
+            }
+
+            user.IsActive = true;
+            await _userRepository.UpdateAsync(user);
+        }
+
+        public async Task ResetPassword(SignUpDto dto)
         {
             await Task.CompletedTask;
         }

@@ -10,5 +10,6 @@ namespace ApiaryDiary.Application.Users.Services
         Task<AccountDto> GetAsync(Guid id);
         Task<JsonWebToken> SignInAsync(SignInDto dto);
         Task SignUpAsync(SignUpDto dto);
+        Task ActivateUser(ActivateAccaountDto dto);
     }
 }

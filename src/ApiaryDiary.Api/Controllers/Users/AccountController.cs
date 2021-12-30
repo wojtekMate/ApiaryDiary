@@ -43,6 +43,12 @@ namespace ApiaryDiary.Api.Controllers.Users
         public async Task<ActionResult<JsonWebToken>> SignInAsync(SignInDto dto)
             => Ok(await _identityService.SignInAsync(dto));
 
+        [HttpPut("activate")]
+        public async Task<ActionResult<JsonWebToken>> ActivateAsync(ActivateAccaountDto dto)
+        {
+            await _identityService.ActivateUser(dto);
+            return NoContent();
+        }
 
         [HttpPost("refresh-tokens")]
         public async Task<ActionResult<JsonWebToken>> UseRefreshToken(RefreshTokenDto dto)

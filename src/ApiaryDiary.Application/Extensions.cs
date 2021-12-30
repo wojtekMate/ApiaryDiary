@@ -20,7 +20,8 @@ namespace ApiaryDiary.Application
                 .AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>()
                 .AddTransient<IIdentityService, IdentityService>()
                 .AddTransient<IRefreshTokenService, RefreshTokenService>()
-                .AddTransient<IRng, Rng>();
+                .AddTransient<IRng, Rng>()
+                .AddTransient<IUserEmailService, UserEmailService>();
                 
     }
 }

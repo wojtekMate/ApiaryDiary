@@ -12,5 +12,6 @@ namespace ApiaryDiary.Core.Users.Entities
         public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; }
         public Dictionary<string, IEnumerable<string>> Claims { get; set; }
-    }
+        public string UserActivationToken { get; set; }
+}
 }
