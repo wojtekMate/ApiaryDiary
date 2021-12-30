@@ -8,7 +8,7 @@ GET http://localhost:5000/test
 ###
 GET http://localhost:5000/Users/Account/location
 ###
-@email = admin@apiary.com
+@email = wojtasiak.mateo@gmail.com
 @password = password
 @role = admin
 @accessToken = secret
@@ -34,6 +34,15 @@ Content-Type: application/json
 {
   "email": "{{email}}",
   "password": "{{password}}"
+}
+
+### Login as the administrator
+# @name sign_in_admin
+Put {{usersApi}}/Account/Activate
+Content-Type: application/json
+
+{
+  "token": "{{email}}",
 }
 
 ###
