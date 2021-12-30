@@ -23,6 +23,9 @@ namespace ApiaryDiary.Application.Users.Repositories
         public async Task<User> GetAsync(string email)
             => await Task.FromResult(_users.SingleOrDefault(x => x.Email == email));
 
+        public async Task<User> GetByGuidAsync(string guid)
+        => await Task.FromResult(_users.SingleOrDefault(x => x.UserActivationToken == guid));
+
         public async Task UpdateAsync(User user)
         {
             await Task.CompletedTask;

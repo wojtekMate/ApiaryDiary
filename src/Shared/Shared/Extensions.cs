@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Shared.Auth;
 using Shared.Contexts;
+using Shared.Email;
 using Shared.Time;
 using System;
 using System.Collections.Generic;
@@ -39,6 +40,7 @@ namespace Shared
             services.AddTransient(sp => sp.GetRequiredService<IContextFactory>().Create());
             services.AddAuth();
             services.AddSingleton<IClock, UtcClock>();
+            services.AddEmailService();
 
             return services;
         }

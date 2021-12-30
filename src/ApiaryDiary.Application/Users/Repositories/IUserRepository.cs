@@ -8,6 +8,7 @@ namespace ApiaryDiary.Application.Users.Repositories
     {
         Task<User> GetAsync(Guid id);
         Task<User> GetAsync(string email);
+        Task<User> GetByGuidAsync(string guid);
         Task AddAsync(User user);
         Task UpdateAsync(User user);
     }
