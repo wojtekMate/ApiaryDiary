@@ -34,7 +34,7 @@ namespace ApiaryDiary.Api
             }
 
             app.UseSharedInfrastructure();
-
+            app.UseMyExceptionHandler();
 
             app.UseEndpoints(endpoints =>
             {
