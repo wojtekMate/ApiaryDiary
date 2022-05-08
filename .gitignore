@@ -330,3 +330,10 @@ ASALocalRun/
 .mfractor/
 
 logs/
+
+*.suo
+*.user
+_ReSharper.*
+bin
+obj
+packages
