@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Modules\PowerStation\ApiaryDiary.Modules.PowerStation.Api\ApiaryDiary.Modules.PowerStation.Api.csproj" />
+      <ProjectReference Include="..\..\Modules\Users\ApiaryDiary.Modules.Users.Api\ApiaryDiary.Modules.Users.Api.csproj" />
+      <ProjectReference Include="..\..\Shared\ApiaryDiary.Shared.Abstractions\ApiaryDiary.Shared.Abstractions.csproj" />
+      <ProjectReference Include="..\..\Shared\ApiaryDiary.Shared.Infrastructure\ApiaryDiary.Shared.Infrastructure.csproj" />
+    </ItemGroup>
+
+</Project>

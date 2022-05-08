@@ -1,0 +1,6 @@
+﻿namespace ApiaryDiary.Shared.Abstractions.Time;
+
+public interface IClock
+{
+    DateTime CurrentDate();
+}
