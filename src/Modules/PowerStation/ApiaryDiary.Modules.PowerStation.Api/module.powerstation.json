@@ -2,7 +2,7 @@
   "powerstation": {
     "module": {
       "name": "power-station",
-      "enabled": false
+      "enabled": true
     }
   }
 }
