@@ -1,3 +1,4 @@
+using ApiaryDiary.Modules.PowerStation.Core;
 using ApiaryDiary.Shared.Abstractions.Modules;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,11 +18,11 @@ public class PowerStationModule : IModule
     
     public void Register(IServiceCollection services)
     {
-        
+        services.AddCore();
     }
 
     public void Use(IApplicationBuilder app)
     {
-
+        
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using ApiaryDiary.Shared.Abstractions.Auth;
+using ApiaryDiary.Shared.Abstractions.Modules;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -8,7 +9,7 @@ namespace ApiaryDiary.Shared.Infrastructure.Auth;
 
 public static class Extensions
 {
-    public static IServiceCollection AddAuth(this IServiceCollection services,
+    public static IServiceCollection AddAuth(this IServiceCollection services,IList<IModule> modules,
         Action<JwtBearerOptions> optionsFactory = null)
     {
         var options = services.GetOptions<AuthOptions>("auth");
@@ -72,6 +73,14 @@ public static class Extensions
         services.AddSingleton(options);
         services.AddSingleton(tokenValidationParameters);
 
+        var policies = modules?.SelectMany(x => x.Policies ?? Enumerable.Empty<string>()) ?? Enumerable.Empty<string>();
+        services.AddAuthorization(authorizationOptions =>
+        {
+            foreach (var policy in policies)
+            {
+                authorizationOptions.AddPolicy(policy,x=>x.RequireClaim("permissions",policy));
+            }
+        });
         return services;
     }
 }

@@ -5,16 +5,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiaryDiary.Modules.PowerStation.Api.Controllers
 {
-    public class AccountController : BaseController
+    public class MeasurementController : BaseController
     {
         private readonly IContext _context;
-        public AccountController( IContext context)
+        public MeasurementController( IContext context)
         {
             _context = context;
         }
         [HttpGet("Location")]
         public ActionResult<string> Get()
-            => OkOrNotFound("Power-Station-Controller");
+            => OkOrNotFound("Power-Station-Measurement-Controller");
         
     }
 }

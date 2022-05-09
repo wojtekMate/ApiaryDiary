@@ -37,10 +37,10 @@ public static class Extensions
         services.AddSingleton<IContextFactory, ContextFactory>();
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddTransient(sp => sp.GetRequiredService<IContextFactory>().Create());
-        services.AddAuth();
+        services.AddAuth(modules);
         services.AddSingleton<IClock, UtcClock>();
         services.AddEmailService();
-
+        services.AddControllers();
         return services;
     }
 
