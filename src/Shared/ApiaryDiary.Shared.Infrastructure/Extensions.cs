@@ -6,6 +6,7 @@ using ApiaryDiary.Shared.Infrastructure.Auth;
 using ApiaryDiary.Shared.Infrastructure.Contexts;
 using ApiaryDiary.Shared.Infrastructure.Email;
 using ApiaryDiary.Shared.Infrastructure.Exceptions;
+using ApiaryDiary.Shared.Infrastructure.Postgres;
 using ApiaryDiary.Shared.Infrastructure.Time;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -79,6 +80,7 @@ public static class Extensions
                 manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
             });
         services.AddErrorHandling();
+        services.AddPostgres();
         return services;
     }
 
@@ -88,7 +90,7 @@ public static class Extensions
         var configuration = serviceProvider.GetRequiredService<IConfiguration>();
         return configuration.GetOptions<T>(sectionName);
     }
-
+    
     public static T GetOptions<T>(this IConfiguration configuration, string sectionName) where T : new()
     {
         var options = new T();

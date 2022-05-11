@@ -2,7 +2,7 @@
 
 namespace ApiaryDiary.Modules.Users.Core.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class InMemoryUserRepository : IUserRepository
     {
         private static IList<User> _users = new List<User>();
 

@@ -2,7 +2,7 @@
 
 namespace ApiaryDiary.Modules.Users.Core.Repositories
 {
-    public class RefreshTokenRepository : IRefreshTokenRepository
+    public class InMemoryRefreshTokenRepository : IRefreshTokenRepository
     {
         private static IList<RefreshToken> _tokens = new List<RefreshToken>()
         {
