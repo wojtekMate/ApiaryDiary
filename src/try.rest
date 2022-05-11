@@ -8,6 +8,8 @@ GET http://localhost:5000/test
 ###
 GET http://localhost:5000/Users/Account/location
 ###
+GET http://localhost:5000/power-station-module/Measurement/location
+###
 @email = wojtasiak.mateo@gmail.com
 @password = password
 @role = admin
