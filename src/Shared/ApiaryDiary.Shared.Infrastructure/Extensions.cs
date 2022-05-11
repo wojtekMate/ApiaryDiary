@@ -5,6 +5,7 @@ using ApiaryDiary.Shared.Infrastructure.Api;
 using ApiaryDiary.Shared.Infrastructure.Auth;
 using ApiaryDiary.Shared.Infrastructure.Contexts;
 using ApiaryDiary.Shared.Infrastructure.Email;
+using ApiaryDiary.Shared.Infrastructure.Exceptions;
 using ApiaryDiary.Shared.Infrastructure.Time;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -77,6 +78,7 @@ public static class Extensions
                     
                 manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
             });
+        services.AddErrorHandling();
         return services;
     }
 
@@ -95,12 +97,10 @@ public static class Extensions
     }
 
     public static IApplicationBuilder UseSharedInfrastructure(this IApplicationBuilder app)
-    {
-        app.UseCors(CorsPolicy);
-        app.UseAuthentication();
-        app.UseRouting();
-        app.UseAuthorization();
-
-        return app;
-    }
+    =>
+        app.UseCors(CorsPolicy)
+                .UseAuthentication()
+                .UseRouting()
+                .UseAuthorization()
+                .UseErrorHandling();
 }

@@ -11,7 +11,7 @@ public static class Extensions
             .AddScoped<ErrorHandlerMiddleware>()
             .AddSingleton<IExceptionToResponseMapper, ExceptionToResponseMapper>();
 
-    public static IApplicationBuilder UseErrorHandling(IApplicationBuilder app)
+    public static IApplicationBuilder UseErrorHandling(this IApplicationBuilder app)
     => app
         .UseMiddleware<ErrorHandlerMiddleware>();
     

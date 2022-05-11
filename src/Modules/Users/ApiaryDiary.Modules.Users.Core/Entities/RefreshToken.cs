@@ -1,4 +1,6 @@
-﻿namespace ApiaryDiary.Modules.Users.Core.Entities
+﻿using ApiaryDiary.Modules.Users.Core.Exceptions;
+
+namespace ApiaryDiary.Modules.Users.Core.Entities
 {
     public class RefreshToken
     {
@@ -20,7 +22,7 @@
         {
             if (string.IsNullOrWhiteSpace(token))
             {
-                throw new Exception();
+                throw new InvalidTokenException();
             }
 
             Id = id;
@@ -35,7 +37,7 @@
         {
             if (Revoked)
             {
-                throw new Exception();
+                throw new InvalidTokenException();
             }
 
             RevokedAt = revokedAt;

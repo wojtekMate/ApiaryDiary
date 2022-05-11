@@ -1,4 +1,5 @@
 ﻿using ApiaryDiary.Modules.Users.Core.Entities;
+using ApiaryDiary.Modules.Users.Core.Exceptions;
 using ApiaryDiary.Modules.Users.Core.Repositories;
 using ApiaryDiary.Shared.Abstractions.Auth;
 using ApiaryDiary.Shared.Abstractions.Time;
@@ -42,7 +43,7 @@ namespace ApiaryDiary.Modules.Users.Core.Services
             var token = await _refreshTokenRepository.GetAsync(refreshToken);
             if (token is null)
             {
-                throw new Exception();
+                throw new InvalidTokenException();
             }
 
             token.Revoke(DateTime.UtcNow);
@@ -54,18 +55,18 @@ namespace ApiaryDiary.Modules.Users.Core.Services
             var token = await _refreshTokenRepository.GetAsync(refreshToken);
             if (token is null)
             {
-                throw new Exception();
+                throw new InvalidTokenException();
             }
 
             if (token.Revoked)
             {
-                throw new Exception();
+                throw new InvalidTokenException();
             }
 
             var user = await _userRepository.GetAsync(token.UserId);
             if (user is null)
             {
-                throw new Exception();
+                throw new InvalidTokenException();
             }
 
             var newRefreshToken = await CreateAsync(user.Id);

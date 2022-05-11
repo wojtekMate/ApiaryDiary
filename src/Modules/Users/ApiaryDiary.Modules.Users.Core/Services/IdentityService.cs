@@ -1,5 +1,7 @@
+using System.Security.Authentication;
 using ApiaryDiary.Modules.Users.Core.DTO;
 using ApiaryDiary.Modules.Users.Core.Entities;
+using ApiaryDiary.Modules.Users.Core.Exceptions;
 using ApiaryDiary.Modules.Users.Core.Repositories;
 using ApiaryDiary.Shared.Abstractions.Auth;
 using ApiaryDiary.Shared.Abstractions.Time;
@@ -47,18 +49,18 @@ namespace ApiaryDiary.Modules.Users.Core.Services
             var user = await _userRepository.GetAsync(dto.Email.ToLowerInvariant());
             if (user is null)
             {
-                throw new Exception();
+                throw new InvalidCredentialException();
             }
 
             if (_passwordHasher.VerifyHashedPassword(default, user.Password, dto.Password) ==
                 PasswordVerificationResult.Failed)
             {
-                throw new Exception();
+                throw new InvalidCredentialException();
             }
 
             if (!user.IsActive)
             {
-                throw new Exception();
+                throw new UserNotActiveException(user.Id);
             }
             var refreshToken = await _refreshTokenService.CreateAsync(user.Id);
             var jwt = _authManager.CreateToken(user.Id.ToString(), user.Role, claims: user.Claims);
@@ -75,7 +77,7 @@ namespace ApiaryDiary.Modules.Users.Core.Services
             var user = await _userRepository.GetAsync(email);
             if (user is not null)
             {
-                throw new Exception();
+                throw new EmailInUseException();
             }
 
             var password = _passwordHasher.HashPassword(default, dto.Password);
@@ -99,7 +101,7 @@ namespace ApiaryDiary.Modules.Users.Core.Services
             var user = await _userRepository.GetByGuidAsync(dto.Token);
             if (user is null)
             {
-                throw new Exception();
+                throw new InvalidActivationTokenException(dto.Token);
             }
 
             user.IsActive = true;
