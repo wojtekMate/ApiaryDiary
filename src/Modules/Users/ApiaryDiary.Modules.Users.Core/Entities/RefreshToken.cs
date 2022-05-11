@@ -12,10 +12,7 @@ namespace ApiaryDiary.Modules.Users.Core.Entities
         public DateTime Expires { get; set; }
         public bool IsExpired => DateTime.UtcNow >= Expires;
         public bool Revoked => RevokedAt.HasValue || IsExpired;
-
-        protected RefreshToken()
-        {
-        }
+        
 
         public RefreshToken(Guid id, Guid userId, string token, DateTime createdAt, DateTime expires,
             DateTime? revokedAt = null )
