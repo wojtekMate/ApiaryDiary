@@ -1,4 +1,5 @@
-﻿using ApiaryDiary.Modules.Users.Core.Entities;
+﻿using ApiaryDiary.Modules.Users.Core.DAL;
+using ApiaryDiary.Modules.Users.Core.Entities;
 using ApiaryDiary.Modules.Users.Core.Repositories;
 using ApiaryDiary.Modules.Users.Core.Services;
 using ApiaryDiary.Shared.Infrastructure.Postgres;
@@ -19,9 +20,6 @@ namespace ApiaryDiary.Modules.Users.Core
                 .AddTransient<IRefreshTokenService, RefreshTokenService>()
                 .AddTransient<IRng, Rng>()
                 .AddTransient<IUserEmailService, UserEmailService>()
-                .AddPostgres<DbContext>();
-
-
-
+                .AddPostgres<UsersDbContext>();
     }
 }
