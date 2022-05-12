@@ -7,6 +7,7 @@ using ApiaryDiary.Shared.Infrastructure.Contexts;
 using ApiaryDiary.Shared.Infrastructure.Email;
 using ApiaryDiary.Shared.Infrastructure.Exceptions;
 using ApiaryDiary.Shared.Infrastructure.Postgres;
+using ApiaryDiary.Shared.Infrastructure.Services;
 using ApiaryDiary.Shared.Infrastructure.Time;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -81,6 +82,7 @@ public static class Extensions
             });
         services.AddErrorHandling();
         services.AddPostgres();
+        services.AddHostedService<AppInitializer>();
         return services;
     }
 

@@ -6,10 +6,10 @@ namespace ApiaryDiary.Modules.Users.Core.DAL.Repositories
 {
     internal class RefreshTokenRepository : IRefreshTokenRepository
     {
-        private readonly RefreshTokensDbContext _context;
+        private readonly UsersDbContext _context;
         private readonly DbSet<RefreshToken> _refreshTokens;
 
-        public RefreshTokenRepository(RefreshTokensDbContext context)
+        public RefreshTokenRepository(UsersDbContext context)
         {
             _context = context;
             _refreshTokens = _context.RefreshTokens;
