@@ -18,10 +18,4 @@
       <ProjectReference Include="..\..\..\Shared\ApiaryDiary.Shared.Abstractions\ApiaryDiary.Shared.Abstractions.csproj" />
       <ProjectReference Include="..\..\..\Shared\ApiaryDiary.Shared.Infrastructure\ApiaryDiary.Shared.Infrastructure.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-      <Compile Remove="DAL\Migrations\UsersDbContextModelSnapshot.cs" />
-      <Compile Remove="DAL\Migrations\20220512140813_Users_Module_Init.Designer.cs" />
-    </ItemGroup>
-
 </Project>
