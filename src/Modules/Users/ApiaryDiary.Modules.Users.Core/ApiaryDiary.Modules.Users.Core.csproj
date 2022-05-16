@@ -6,15 +6,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60">
-        <HintPath>..\..\..\..\..\..\..\..\..\usr\local\share\dotnet\shared\Microsoft.AspNetCore.App\6.0.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
-      </Reference>
-      <Reference Include="Microsoft.Extensions.Identity.Core, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60">
-        <HintPath>..\..\..\..\..\..\..\..\..\usr\local\share\dotnet\shared\Microsoft.AspNetCore.App\6.0.0\Microsoft.Extensions.Identity.Core.dll</HintPath>
-      </Reference>
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\..\..\Shared\ApiaryDiary.Shared.Abstractions\ApiaryDiary.Shared.Abstractions.csproj" />
       <ProjectReference Include="..\..\..\Shared\ApiaryDiary.Shared.Infrastructure\ApiaryDiary.Shared.Infrastructure.csproj" />
     </ItemGroup>
