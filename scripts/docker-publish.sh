@@ -1,5 +1,5 @@
 #!/bin/bash
-cd src/ApiaryDiary.Api
+cd src/Bootstrapper/ApiaryDiary.Bootstrapper
 DOCKER_ENV=''
 DOCKER_TAG=''
 case "$TRAVIS_BRANCH" in

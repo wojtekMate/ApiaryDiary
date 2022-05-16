@@ -1,3 +1,3 @@
 #!/bin/bash
-cd ../src/ApiaryDiary.Api
+cd ../src/Bootstrapper/ApiaryDiary.Bootstrapper
 dotnet run
